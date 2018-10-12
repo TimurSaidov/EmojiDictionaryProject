@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Present Modally - сигвей, использующий, когда экран появляется, а затем возвращается на предыдущий. Show - сигвей, когда экран не возвращается, а идет далее вглубь.
+
 class TableViewController: UITableViewController {
     
     var emoji: [Emoji] = [
@@ -57,7 +59,17 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            emoji.remove(at: indexPath.row)
+//            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .fade) // Удаляется ячейка, и вызываются 2 метода: numberOfSections и tableView(numberOfRowsInSection), чтобы заново перерисовать ячейку. Если удаление из массива будет позже этого метода, возникнет ошибка, так как экземпляров модели будет по-прежнему n, а ячеек n-1.
+//            tableView.endUpdates()
+        }
     }
     
     /*
@@ -78,8 +90,8 @@ class TableViewController: UITableViewController {
     
     // MARK:  - Table view delegate
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let emoji = self.emoji[indexPath.row]
-        print("\(emoji.symbol) \(emoji.name) - \(indexPath)") 
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let emoji = self.emoji[indexPath.row]
+//        print("\(emoji.symbol) \(emoji.name) - \(indexPath)") 
+//    }
 }
