@@ -72,26 +72,46 @@ class TableViewController: UITableViewController {
         }
     }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
     // MARK:  - Table view delegate
     
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let emoji = self.emoji[indexPath.row]
 //        print("\(emoji.symbol) \(emoji.name) - \(indexPath)") 
 //    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender) // Желательно всегда вызывать родительский, когда есть переопределение override.
+        
+        if segue.identifier == "EditEmojiSegue" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let emoji = self.emoji[indexPath.row]
+                guard let navigationController = segue.destination as? UINavigationController else { return }
+                guard let addEditTableViewController = navigationController.viewControllers.first as? AddEditTableViewController else { return } //  = navigationController.topViewController
+                addEditTableViewController.navigationItem.title = "Edit"
+                addEditTableViewController.emoji = emoji
+            }
+        }
+    }
+    
+    @IBAction func unwindToTableView(segue: UIStoryboardSegue) {
+        guard segue.identifier == "saveUnwind" else { return }
+        
+        guard let sourceViewController = segue.source as? AddEditTableViewController else { return }
+        
+        guard let newOrEditingEmoji = sourceViewController.emoji else { return }
+        
+        // Если выбрана определенная строка, то ячейка перезаписывается - это изменение (Edit), иначе (если нажимается плюс (Add), indexPathForSelectedRow = nil), то  создается новая ячейка с новыми данными. Возможен и другой вариант проверки: если title AddEditTableViewController Edit, то надо перезаписывать ячейку, а если title = Add, то создавать новую ячейку.
+//        if sourceViewController.title == "Edit" {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            emoji[selectedIndexPath.row] = newOrEditingEmoji
+            tableView.reloadRows(at: [selectedIndexPath], with: .fade) // Обновление только выбранной ячейки.
+//        } else if sourceViewController.title = "Add" {
+        } else {
+            emoji.append(newOrEditingEmoji)
+            let newIndexPath = IndexPath(row: emoji.count - 1, section: 0)
+            tableView.insertRows(at: [newIndexPath], with: .fade) // Добавление в конец таблицы (конец таблицы, так как newIndexPath.row = emoji.count-1) новой ячейки с  новым элементом.
+        }
+    }
 }

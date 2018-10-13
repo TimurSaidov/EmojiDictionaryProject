@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3936CCEA2172167E00A88983 /* AddEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3936CCE92172167E00A88983 /* AddEditTableViewController.swift */; };
 		39BA5C4F2170B29700E543ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA5C4E2170B29700E543ED /* AppDelegate.swift */; };
 		39BA5C542170B29700E543ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BA5C522170B29700E543ED /* Main.storyboard */; };
 		39BA5C562170B29900E543ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39BA5C552170B29900E543ED /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3936CCE92172167E00A88983 /* AddEditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditTableViewController.swift; sourceTree = "<group>"; };
 		39BA5C4B2170B29700E543ED /* EmojiDictionaryProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiDictionaryProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39BA5C4E2170B29700E543ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39BA5C532170B29700E543ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				39BA5C4E2170B29700E543ED /* AppDelegate.swift */,
 				39BA5C602170B2DB00E543ED /* TableViewController.swift */,
 				39BA5C652170BA5400E543ED /* TableViewCell.swift */,
+				3936CCE92172167E00A88983 /* AddEditTableViewController.swift */,
 				39BA5C642170B2FB00E543ED /* Model */,
 				39BA5C522170B29700E543ED /* Main.storyboard */,
 				39BA5C552170B29900E543ED /* Assets.xcassets */,
@@ -153,6 +156,7 @@
 				39BA5C662170BA5400E543ED /* TableViewCell.swift in Sources */,
 				39BA5C4F2170B29700E543ED /* AppDelegate.swift in Sources */,
 				39BA5C612170B2DB00E543ED /* TableViewController.swift in Sources */,
+				3936CCEA2172167E00A88983 /* AddEditTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
